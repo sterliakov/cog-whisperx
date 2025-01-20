@@ -1,0 +1,30 @@
+# https://replicate.com/docs/guides/push-a-model-using-github-actions
+name: Push to Replicate
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  MODEL_NAME: sterliakov/whisperx-with-prompt
+
+jobs:
+  push_to_replicate:
+    name: Push to Replicate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+
+    - name: Setup Cog
+      uses: replicate/setup-cog@v2
+      with:
+        token: ${{ secrets.REPLICATE_API_TOKEN }}
+
+    - name: Push to Replicate
+      run: cog push r8.im/${{ env.MODEL_NAME }}
