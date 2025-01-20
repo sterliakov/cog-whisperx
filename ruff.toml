@@ -1,0 +1,48 @@
+target-version = 'py311'
+
+[format]
+preview = true
+
+[lint]
+# exclude = [
+# ".svn",
+# "CVS",
+# ".bzr",
+# ".hg",
+# ".git",
+# "__pycache__",
+# ".tox",
+# ".nox",
+# ".eggs",
+# "*.egg",
+# "migrations",
+# "manage.py",
+# ]
+extend-ignore = [
+    "CPY",  # Missing copyright notice at top of file
+    "D1",  # Missing docstrings
+    "D400",  # Conflicts with D415
+    "DOC2",  # Returns not in docstring
+    "DOC4",  # Yields not in docstring
+    "DOC5",  # Exceptions not in docstring
+    "TD",  # to do comment lints
+    "FIX00",  # Line contains {FIXME,TODO,HACK}, consider resolving the issue
+    "ANN",  # Type ints
+    # For formatter
+    "COM812",
+    # Doesn't play well with cog definitions
+    "B008",  # Do not perform function call `Input` in argument defaults; instead, perform the call within the function, or read the default from a module-level singleton variable
+    "FBT001",  # Boolean-typed positional argument in function definition
+]
+extend-safe-fixes = ["F401"]
+preview = true
+select = ["ALL"]
+
+[lint.isort]
+combine-as-imports = true
+force-wrap-aliases = true
+required-imports = ["from __future__ import annotations"]
+split-on-trailing-comma = false
+
+[lint.pydocstyle]
+convention = "google"
