@@ -63,7 +63,7 @@ class Predictor(BasePredictor):
         """Run a single prediction on the model."""
         if debug:
             LOGGER.setLevel(logging.DEBUG)
-        self.model.options = self.model.options._replace(initial_prompt=initial_prompt)
+        self.model.options.initial_prompt = initial_prompt
         with torch.inference_mode():
             result = self.model.transcribe(str(audio), batch_size=batch_size)
             # result is dict w/keys ['segments', 'language']
